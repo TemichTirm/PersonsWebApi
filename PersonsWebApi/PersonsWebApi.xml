@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PersonsWebApi</name>
+    </assembly>
+    <members>
+        <member name="T:PersonsWebApi.Controllers.PersonsController">
+            <summary>Контроллер обрабатывающий CRUD запросы http</summary>
+        </member>
+        <member name="M:PersonsWebApi.Controllers.PersonsController.GetById(System.Int32)">
+            <summary>Возвращает данные человека по id</summary>
+            <param name="id">Уникальный идентификационный номер</param>
+            <returns>Информация о человеке</returns>
+        </member>
+        <member name="M:PersonsWebApi.Controllers.PersonsController.GetByName(System.String,System.String)">
+            <summary>Возвращает данные человека по фамилии и имени. Если какой-то из параментов не задан, выдает список людей</summary>
+            <param name="lastName">Фамилия</param>
+            <param name="firstName">Имя</param>
+            <returns>Список с данными о найденных людях</returns>
+        </member>
+    </members>
+</doc>

@@ -1,6 +1,7 @@
 ﻿
 namespace PersonsWebApi.Models
 {
+    /// <summary>Модель записи о человеке в базе данных</summary>
     public class Person
     {
         public Person()

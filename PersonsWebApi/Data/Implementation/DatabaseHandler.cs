@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 
 namespace PersonsWebApi.Data.Implementation
 {
+    /// <summary>Обработчик базы данных, хранящей записи типа Person</summary>
     public class DatabaseHandler : IDatabaseHandler<Person>
     {
         private static readonly string _fileName = "initial_data.json";
         private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>Возвращает все данные типа Person из базы данных</summary>
+        /// <returns>Коллекция записей Person</returns>
         public async Task<IEnumerable<Person>> GetData()
         {
             try
@@ -21,7 +24,6 @@ namespace PersonsWebApi.Data.Implementation
                 using (var streamReader = new StreamReader(_fileName))
                 {
                     var serializedJson = await streamReader.ReadToEndAsync();
-
                     var result = JsonSerializer.Deserialize<IEnumerable<Person>>(serializedJson,
                                         new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                     return result;
@@ -42,6 +44,9 @@ namespace PersonsWebApi.Data.Implementation
             return null;
         }
 
+        /// <summary>Сохраняет данные типа Person в базу данных</summary>
+        /// <param name="persons">Коллекция записей типа Person</param>
+        /// <param name="append">Флаг дозаписи. True - если база данных существует, данные будут добавлены в конец</param>
         public async Task SaveDataCollection(IEnumerable<Person> persons, bool append = true)
         {
             try
@@ -67,6 +72,8 @@ namespace PersonsWebApi.Data.Implementation
             }
         }
 
+        /// <summary>Сохраняет экземпляр типа Person в базу данных</summary>
+        /// <param name="person">Объект типа Person</param>
         public async Task SaveDataItem(Person person)
         {
             try

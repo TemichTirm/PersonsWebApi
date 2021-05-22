@@ -11,11 +11,7 @@ namespace PersonsWebApi
         public static void Main(string[] args)
         {
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            //var repo = new PersonsPepository(new DatabaseHandler());
-            //var person = new Person { Id = 100, FirstName = "AAAAAAA", LastName = "BBBBB", Email = "ccc@dddddd.ru", Company = "FFFFFF", Age = 40 };
-            ////repo.Delete(10);
-            //var result = repo.GetList(5, -4);
-            //Console.WriteLine();
+
             try
             {
                 logger.Debug("init main");

@@ -5,16 +5,20 @@ using System.Linq;
 
 namespace PersonsWebApi.Data.Implementation
 {
+    /// <summary>Класс взаимодействия с базой данных, хранящей записи о людях</summary>
     public class PersonsPepository : IPersonsRepository
     {
-        private List<Person> _persons;
+        private readonly List<Person> _persons;
         private readonly IDatabaseHandler<Person> _databaseHandler;
 
+        /// <summary>Конструктор с инъектированием обработчика базы данных</summary>
+        /// <param name="databaseHandler">Обработчик базы данных, хранящей записи типа Person</param>
         public PersonsPepository(IDatabaseHandler<Person> databaseHandler)
         {
             _databaseHandler = databaseHandler;
             _persons = _databaseHandler.GetData().Result?.ToList();
         }
+
         public IEnumerable<Person> GetAll()
         {
             return _persons;
@@ -61,9 +65,9 @@ namespace PersonsWebApi.Data.Implementation
             return false;
         }
 
-        public Person GetByFullName(string lastName, string firstName)
+        public IEnumerable<Person> GetByFullName(string lastName, string firstName)
         {
-            return _persons.FirstOrDefault(person => person.LastName == lastName && person.FirstName == firstName);
+            return _persons.FindAll(person => person.LastName == lastName && person.FirstName == firstName);
         }
         public IEnumerable<Person> GetByLastName(string lastName)
         {

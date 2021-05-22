@@ -13,7 +13,7 @@ namespace PersonsWebApi
     {
         public MapperProfile()
         {
-            CreateMap<PersonCreateRequest, Person>();            
+            CreateMap<PersonCreateAndUpdateRequest, Person>();            
         }
     }
 }

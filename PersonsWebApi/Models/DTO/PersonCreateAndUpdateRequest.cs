@@ -1,7 +1,8 @@
 ﻿
 namespace PersonsWebApi.Models.DTO
 {
-    public class PersonCreateRequest
+    /// <summary>Модель для запроса на создание или изменение записи о человеке</summary>
+    public class PersonCreateAndUpdateRequest
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

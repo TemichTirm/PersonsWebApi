@@ -8,19 +8,18 @@ using System.Linq;
 
 namespace PersonsWebApi.Domain.Implementation
 {
+    /// <summary>Класс обработчика запров поступающих от контроллера</summary>
     public class PersonsManager : IPersonsManager
     {
         private readonly IPersonsRepository _repository;
         private readonly IMapper _mapper;
-
-
         public PersonsManager(IPersonsRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public void Create(PersonCreateRequest person)
+        public void Create(PersonCreateAndUpdateRequest person)
         {
             var lastId = _repository.GetAll().Last().Id;
             var newPersonWithId = _mapper.Map<Person>(person);
@@ -42,12 +41,7 @@ namespace PersonsWebApi.Domain.Implementation
         {
             if (lastName != null && firstName != null)
             {
-                var result = _repository.GetByFullName(lastName, firstName);
-                if (result != null)
-                {
-                    return new List<Person>() { result };
-                }
-                else return new List<Person>();
+                return _repository.GetByFullName(lastName, firstName);
             }
             else if (lastName != null)
             {
@@ -64,9 +58,11 @@ namespace PersonsWebApi.Domain.Implementation
             return _repository.GetList(skip, take);
         }
 
-        public bool Update(Person person)
+        public bool Update(int id, PersonCreateAndUpdateRequest person)
         {
-            return _repository.Update(person);
+            var updatePerson = _mapper.Map<Person>(person);
+            updatePerson.Id = id;
+            return _repository.Update(updatePerson);
         }
     }
 }
